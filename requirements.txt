@@ -1,0 +1,6 @@
+streamlit
+llama_index
+trulens_eval
+numpy
+nest_asyncio
+google-generativeai
