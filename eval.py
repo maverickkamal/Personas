@@ -4,7 +4,7 @@ from trulens_eval import OpenAI as fOpenAI
 import numpy as np
 
 
-class DevLens:
+class TruLens:
     def __init__(self, query_engine, user_query, response):
         self.query_engine = query_engine
         self.user_query = user_query
