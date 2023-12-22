@@ -1,13 +1,13 @@
 import streamlit as st
-from client import Priya
-from initialize_services import initialize_services
+#from client import Priya
+from vectors import initialize_services
 from components.include import include
-from components.dev_lens import DevLens
+from eval import TrueLens
 
 
-avatar_img = "https://raw.githubusercontent.com/manasvitickoo/ask_divya_img/main/ask_divya.png"
+avatar = "https://media.roboflow.com/spaces/gemini-icon.png"
 st.set_page_config(
-    page_title="Ask Priya - US Immigration AI Helper", page_icon=avatar_img)
+    page_title="Personas - Personality Match", page_icon=avatar)
 
 include(home=True)
 
@@ -16,26 +16,26 @@ with open("app/style.css") as css:
 
 query_engine = initialize_services()
 
-client = Priya(query_engine)
-# Define dev_mode
-dev_mode = False  # Set this to False to disable dev_mode
+#client = Priya(query_engine)
+# Define sudo
+sudo = False  # Set this to False to disable dev_mode
 
 
 def ask_and_respond(prompt):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
-    with st.chat_message("assistant", avatar=avatar_img):
+    with st.chat_message("assistant", avatar=avatar):
         with st.spinner('Processing...'):
-            response = client.make_query(
+            response = query_engine.query(
                 st.session_state.messages[-1]["content"])
         st.markdown(response)
 
-    # DevLens logic for dev_mode
-    if dev_mode:
-        dev_lens = DevLens(query_engine, prompt, response)
-        dev_results = dev_lens.return_rag_triad()
-        with st.expander("Development Mode Insights"):
+    # TrueLens logic for dev_mode
+    if sudo:
+        developer = TrueLens(query_engine, prompt, response)
+        dev_results = developer.return_rag_triad()
+        with st.expander("Development Mode Evalution"):
             st.json(dev_results)
 
     st.session_state.messages.append(
@@ -45,14 +45,14 @@ def ask_and_respond(prompt):
 ### Initial message ###
 start_message = st.chat_message("assistant", avatar=avatar_img)
 start_message.write(
-    "Hello there, what questions about US immigration can I help you with today?")
-start_message.write("Examples of questions I can answer:")
-examples = [
-    "What is USCIS?",
-    "How do I check my case status?",
-    "¿Puedo obtener una visa de opción STEM si voy a una universidad estadounidense?",
-]
-example_buttons = [start_message.button(example) for example in examples]
+    "Hello friend, I am your Personality assisstant. how may i help you?")
+#start_message.write("Examples of questions I can answer:")
+#examples = [
+  #  "What is USCIS?",
+  #  "How do I check my case status?",
+   # "¿Puedo obtener una visa de opción STEM si voy a una universidad estadounidense?",
+#]
+#example_buttons = [start_message.button(example) for example in examples]
 #######################
 
 if "messages" not in st.session_state:
