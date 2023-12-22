@@ -17,9 +17,12 @@ with open("app/style.css") as css:
     st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
 date = st.sidebar.date_input("Enter date of Birth", value="today", min_value=1900/01/01, max_value=2030/01/01)
 time = st.sidebar.time_input("Enter time of birth", datetime.time(12, 00))
+longitude = st.number_input("Insert your longitude", value=15, placeholder="Type your longitude...")
+latitude = st.number_input("Insert your latitude", value=15, placeholder="Type your latitude...")
 
-birth_data = BirthDataCalculator(date, time, longitude, latitude)
-content = birth_data.calculate_birth_data()
+if st.sidebar.button('Load data'):
+    birth_data = BirthDataCalculator(date, time, longitude, latitude)
+    content = birth_data.calculate_birth_data()
 
 query_engine = initialize_services()
 
