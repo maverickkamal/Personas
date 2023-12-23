@@ -15,8 +15,8 @@ st.set_page_config(
 
 #with open("app/style.css") as css:
    # st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
-minDate = datetime.date(1, 1, 1900)
-maxDate = datetime.date(1, 1, 2030)
+minDate = datetime.date(1900, 1, 1)
+maxDate = datetime.date(2030, 1, 1)
 with st.sidebar:
     st.write("Provide your Personas")
     date = st.date_input("Enter date of Birth", value="today", min_value=minDate, max_value=maxDate)
