@@ -4,7 +4,7 @@ from content import BirthDataCalculator
 from vectors import initialize_services
 import google.generativeai as genai
 from eval import TruLens
-from datetime import datetime
+#from datetime import datetime
 
 
 
@@ -24,9 +24,9 @@ with st.sidebar:
     sttime = st.sidebar.time_input("Enter time of birth", datetime.time(12, 00))
     longitude = st.number_input("Insert your longitude", value=15, placeholder="Type your longitude...")
     latitude = st.number_input("Insert your latitude", value=15, placeholder="Type your latitude...")
-    sdate = datetime.strptime(stdate, "%Y-%m-%d")
+    sdate = datetime.datetime.strptime(stdate, "%Y-%m-%d")
     date = sdate.strftime("%d/%m/%Y")
-    stime = datetime.strptime(sttime, "%H:%M:%S")
+    stime = datetime.datetime.strptime(sttime, "%H:%M:%S")
     time = stime.strftime("%H:%M")
     st.write(date, time)
     if st.button('Load data'):
