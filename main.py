@@ -9,21 +9,30 @@ from eval import TruLens
 
 avatar = "https://media.roboflow.com/spaces/gemini-icon.png"
 st.set_page_config(
-    page_title="Personas - Personality Match", page_icon=avatar)
+    page_title="ZENTiDE - Personality Match", page_icon=avatar)
 
 #include(home=True)
 
 #with open("app/style.css") as css:
    # st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
-date = st.sidebar.date_input("Enter date of Birth", value="today", min_value=1900/1/1, max_value=2030/1/1)
-time = st.sidebar.time_input("Enter time of birth", datetime.time(12, 00))
-longitude = st.number_input("Insert your longitude", value=15, placeholder="Type your longitude...")
-latitude = st.number_input("Insert your latitude", value=15, placeholder="Type your latitude...")
+minDate = datetime.date(01, 01, 1900)
+maxDate = datetime.date(01, 01, 2030)
+with st.sidebar:
+    st.write("Provide your Personas")
+    date = st.date_input("Enter date of Birth", value="today", min_value=minDate, max_value=maxDate)
+    time = st.sidebar.time_input("Enter time of birth", datetime.time(12, 00))
+    longitude = st.number_input("Insert your longitude", value=15, placeholder="Type your longitude...")
+    latitude = st.number_input("Insert your latitude", value=15, placeholder="Type your latitude...")
+    if st.button('Load data'):
+        birth_data = BirthDataCalculator(date, time, longitude, latitude)
+        content = birth_data.calculate_birth_data()
 
-if st.sidebar.button('Load data'):
-    birth_data = BirthDataCalculator(date, time, longitude, latitude)
-    content = birth_data.calculate_birth_data()
-
+    st.divider()
+    st.markdown("""<span ><font size=1>Connect With Me</font></span>""",unsafe_allow_html=True)
+    "[Linkedin](www.linkedin.com/in/musa-kamaludeen-814009218/)"
+    "[GitHub](https://github.com/maverickkamal)"
+    
+    
 query_engine = initialize_services()
 
 
