@@ -19,13 +19,17 @@ minDate = datetime.date(1900, 1, 1)
 maxDate = datetime.date(2030, 1, 1)
 with st.sidebar:
     st.write("Provide your Personas")
-    date = st.date_input("Enter date of Birth", value="today", min_value=minDate, max_value=maxDate, format="DD/MM/YYYY")
-    time = st.sidebar.time_input("Enter time of birth", datetime.time(12, 00))
+    stdate = st.date_input("Enter date of Birth", value="today", min_value=minDate, max_value=maxDate, format="DD/MM/YYYY")
+    sttime = st.sidebar.time_input("Enter time of birth", datetime.time(12, 00))
     longitude = st.number_input("Insert your longitude", value=15, placeholder="Type your longitude...")
     latitude = st.number_input("Insert your latitude", value=15, placeholder="Type your latitude...")
+    sdate = datetime.strptime(stdate, "%Y-%m-%d")
+    date = sdate.strftime("%d/%m/%Y")
+    stime = datetime.strptime(sttime, "%H:%M:%S")
+    time = stime.strftime("%H:%M")
     st.write(date, time)
     if st.button('Load data'):
-        birth_data = BirthDataCalculator(str(date), str(time), longitude, latitude)
+        birth_data = BirthDataCalculator(date, time, longitude, latitude)
         content = birth_data.calculate_birth_data
         st.write(content)
 
