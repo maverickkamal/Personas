@@ -2,7 +2,7 @@ import streamlit as st
 import datetime 
 from content import BirthDataCalculator
 from vectors import initialize_services
-from util.home import include
+#from util.home import include
 from eval import TrueLens
 
 
@@ -11,7 +11,7 @@ avatar = "https://media.roboflow.com/spaces/gemini-icon.png"
 st.set_page_config(
     page_title="Personas - Personality Match", page_icon=avatar)
 
-include(home=True)
+#include(home=True)
 
 #with open("app/style.css") as css:
    # st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
