@@ -18,6 +18,13 @@ st.set_page_config(
    # st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
 minDate = datetime.date(1900, 1, 1)
 maxDate = datetime.date(2030, 1, 1)
+content = None  # Global variable
+
+def load_data():
+    global content
+    content = birth_data.calculate_birth_data()
+    if "error" in content:
+        st.write(f"Error: {content['error']}")
 with st.sidebar:
     st.write("Provide your Personas")
     stdate = st.date_input("Enter date of Birth", value="today", min_value=minDate, max_value=maxDate, format="DD/MM/YYYY")
@@ -31,9 +38,10 @@ with st.sidebar:
     birth_data = BirthDataCalculator(date, time, longitude, latitude)
     st.write(date, time)
     if st.button('Load data'):
-        content = birth_data.calculate_birth_data()  # Call the method
-        if "error" in content:
-            st.write(f"Error: {content['error']}")
+        load_data()
+       # content = birth_data.calculate_birth_data()  # Call the method
+        #if "error" in content:
+           # st.write(f"Error: {content['error']}")
         #else:
           #  st.write(content)
 
