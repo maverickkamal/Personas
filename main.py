@@ -67,8 +67,7 @@ def ask_and_respond(prompt):
         st.markdown(prompt)
     with st.chat_message("assistant", avatar=avatar):
         with st.spinner('Generating...'):
-            response = query_engine.query(
-                "{st.session_state.messages[-1]["content"]} - {temp}")
+            response = query_engine.query(f"{st.session_state.messages[-1]["content"]} - {temp}")
             #res = model.generate_content(f"{content} - {response}")
         st.markdown(response)
 
