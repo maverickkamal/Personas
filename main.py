@@ -48,10 +48,11 @@ def ask_and_respond(prompt):
     with st.chat_message("user"):
         st.markdown(prompt)
     with st.chat_message("assistant", avatar=avatar):
-        with st.spinner('Processing...'):
+        with st.spinner('Generating...'):
             response = query_engine.query(
                 st.session_state.messages[-1]["content"])
-        st.markdown(response)
+            res = model.generate_content(f"{content} - {response}")
+        st.markdown(res.text)
 
     # TrueLens logic for dev_mode
     if sudo:
