@@ -23,9 +23,11 @@ with st.sidebar:
     time = st.sidebar.time_input("Enter time of birth", datetime.time(12, 00))
     longitude = st.number_input("Insert your longitude", value=15, placeholder="Type your longitude...")
     latitude = st.number_input("Insert your latitude", value=15, placeholder="Type your latitude...")
+    st.write(date, time)
     if st.button('Load data'):
         birth_data = BirthDataCalculator(date, time, longitude, latitude)
-        content = birth_data.calculate_birth_data()
+        content = birth_data.calculate_birth_data
+        st.write(content)
 
     st.divider()
     st.markdown("""<span ><font size=1>Connect With Me</font></span>""",unsafe_allow_html=True)
@@ -51,8 +53,8 @@ def ask_and_respond(prompt):
         with st.spinner('Generating...'):
             response = query_engine.query(
                 st.session_state.messages[-1]["content"])
-            res = model.generate_content(f"{content} - {response}")
-        st.markdown(res.text)
+            #res = model.generate_content(f"{content} - {response}")
+        #st.markdown(res.text)
 
     # TrueLens logic for dev_mode
     if sudo:
