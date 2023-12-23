@@ -2,7 +2,6 @@ import os
 import streamlit as st
 from llama_index.indices import VectaraIndex
 from llama_index.llms import Gemini
-from .g_key import write_file
 
 @st.cache_resource
 def initialize_services():
