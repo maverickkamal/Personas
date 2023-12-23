@@ -28,9 +28,9 @@ with st.sidebar:
     date = sdate.strftime("%d/%m/%Y")
     stime = datetime.datetime.strptime(str(sttime), "%H:%M:%S")
     time = stime.strftime("%H:%M")
+    birth_data = BirthDataCalculator(date, time, longitude, latitude)
     st.write(date, time)
     if st.button('Load data'):
-        birth_data = BirthDataCalculator(date, time, longitude, latitude)
         content = birth_data.calculate_birth_data
         st.write(content)
 
