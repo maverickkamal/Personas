@@ -33,7 +33,7 @@ with st.sidebar:
     "[GitHub](https://github.com/maverickkamal)"
 
 
-genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 model = genai.GenerativeModel('gemini-pro')
     
 query_engine = initialize_services()
