@@ -1,6 +1,6 @@
 import streamlit as st
 import datetime 
-from content import BirthDataCalculator
+from context import BirthDataCalculator
 from vectors import initialize_services
 import google.generativeai as genai
 from eval import TruLens
