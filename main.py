@@ -81,11 +81,11 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"], avatar=(avatar if message["role"] == "assistant" else None)):
         st.markdown(message["content"])
 
-chat_input_box = st.chat_input("What would you like to ask about?")
+chat_input_box = st.chat_input("what's on your mind??")
 
-for example, example_button in zip(examples, example_buttons):
-    if example_button:
-        ask_and_respond(example)
+#for example, example_button in zip(examples, example_buttons):
+    #if example_button:
+     #   ask_and_respond(example)
 
 if chat_input_box:
     ask_and_respond(chat_input_box)
