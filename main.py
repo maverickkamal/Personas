@@ -60,7 +60,7 @@ query_engine = initialize_services()
 # Define sudo
 sudo = False  # Set this to False to disable dev_mode
 
-
+temp = """Your task is to create a personalized experience for the user  by providing a personality evaluation in which you help them by motivating and inspiring them, don't over rely on the information from the vector database and know how to response to queries that doesnt return any good information from the vector database: """
 def ask_and_respond(prompt):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
@@ -68,7 +68,7 @@ def ask_and_respond(prompt):
     with st.chat_message("assistant", avatar=avatar):
         with st.spinner('Generating...'):
             response = query_engine.query(
-                st.session_state.messages[-1]["content"])
+                f"{st.session_state.messages[-1]["content"]} + {temp}")
             #res = model.generate_content(f"{content} - {response}")
         st.markdown(response)
 
