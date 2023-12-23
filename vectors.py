@@ -12,7 +12,7 @@ def initialize_services():
     llm = Gemini(
         model="models/gemini-pro-vision"
     )
-    
+    index = VectaraIndex()
 
     # Load the vector index
     query_engine = index.as_query_engine(
