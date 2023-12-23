@@ -34,8 +34,8 @@ with st.sidebar:
         content = birth_data.calculate_birth_data()  # Call the method
         if "error" in content:
             st.write(f"Error: {content['error']}")
-        else:
-            st.write(content)
+        #else:
+          #  st.write(content)
 
     st.divider()
     st.markdown("""<span ><font size=1>Connect With Me</font></span>""",unsafe_allow_html=True)
@@ -61,8 +61,8 @@ def ask_and_respond(prompt):
         with st.spinner('Generating...'):
             response = query_engine.query(
                 st.session_state.messages[-1]["content"])
-            #res = model.generate_content(f"{content} - {response}")
-        #st.markdown(res.text)
+            res = model.generate_content(f"{content} - {response}")
+        st.markdown(res.text)
 
     # TrueLens logic for dev_mode
     if sudo:
