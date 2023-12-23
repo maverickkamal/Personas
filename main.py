@@ -2,7 +2,7 @@ import streamlit as st
 import datetime 
 from content import BirthDataCalculator
 from vectors import initialize_services
-#from util.home import include
+import google.generativeai as genai
 from eval import TruLens
 
 
@@ -31,7 +31,10 @@ with st.sidebar:
     st.markdown("""<span ><font size=1>Connect With Me</font></span>""",unsafe_allow_html=True)
     "[Linkedin](www.linkedin.com/in/musa-kamaludeen-814009218/)"
     "[GitHub](https://github.com/maverickkamal)"
-    
+
+
+genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+model = genai.GenerativeModel('gemini-pro')
     
 query_engine = initialize_services()
 
