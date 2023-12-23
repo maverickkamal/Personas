@@ -69,8 +69,8 @@ def ask_and_respond(prompt):
         with st.spinner('Generating...'):
             response = query_engine.query(
                 st.session_state.messages[-1]["content"])
-            res = model.generate_content(f"{content} - {response}")
-        st.markdown(res.text)
+            #res = model.generate_content(f"{content} - {response}")
+        st.markdown(response)
 
     # TrueLens logic for dev_mode
     if sudo:
