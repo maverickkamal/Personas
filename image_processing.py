@@ -19,6 +19,14 @@ def gemini(prompt, image_data):
         prompt=prompt,
         image_documents=[images_document],
     )
+    # Use a list to store parts of the response
+    response_parts = []
+    
     for r in stream_complete_response:
-        response = r.text
-    return response
+        response_parts.append(r.text)
+
+    # Concatenate all parts into a single string
+    complete_response = "".join(response_parts)
+    
+    return complete_response
+
