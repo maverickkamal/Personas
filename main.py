@@ -4,11 +4,13 @@ from context import BirthDataCalculator
 from vectors import initialize_services
 import google.generativeai as genai
 from eval import TruLens
+from image_processing import gemini
 #from datetime import datetime
 
 
 
 avatar = "https://media.roboflow.com/spaces/gemini-icon.png"
+avatar2 = "https://i.ibb.co/8BKfNPx/avatar.png"
 st.set_page_config(
     page_title="ZENTiDE - Personality Match", page_icon=avatar)
 
@@ -16,6 +18,10 @@ st.set_page_config(
 
 #with open("app/style.css") as css:
    # st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
+image = st.file_uploader(f"File uploader ", accept_multiple_files=False, type = ['jpg', 'png'])
+with open("button.css") as css:
+    st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html=True)
+
 minDate = datetime.date(1900, 1, 1)
 maxDate = datetime.date(2030, 1, 1)
 content = None  # Global variable
@@ -63,11 +69,15 @@ sudo = False  # Set this to False to disable dev_mode
 
 def ask_and_respond(prompt):
     st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
+    with st.chat_message("user", avatar=avatar2):
         st.markdown(prompt)
     with st.chat_message("assistant", avatar=avatar):
         with st.spinner('Generating...'):
-            response = query_engine.query(st.session_state.messages[-1]["content"])
+            if image is not None:
+                bytes_data = image.getvalue()
+                response = gemini(st.session_state.messages[-1]["content"], bytes_data)
+            else:
+                response = query_engine.query(st.session_state.messages[-1]["content"])
             #res = model.generate_content(f"{content} - {response}")
         st.markdown(response)
 
