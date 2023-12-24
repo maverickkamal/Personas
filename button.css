@@ -1,0 +1,20 @@
+[data-testid='stFileUploader'] {
+    width: auto; /* Adjust width as needed */
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+[data-testid='stFileUploader'] section {
+    padding: 0;
+    float: left;
+}
+
+[data-testid='stFileUploader'] section > input + div {
+    display: none;
+}
+
+[data-testid='stFileUploader'] section + div {
+    float: right;
+    padding-top: 0;
+}
