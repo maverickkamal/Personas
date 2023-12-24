@@ -109,7 +109,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 for message in st.session_state.messages:
-    with st.chat_message(message["role"], avatar=(avatar if message["role"] == "assistant" else None)):
+    with st.chat_message(message["role"], avatar=(avatar if message["role"] == "assistant" else (avatar2 if message["role"] == "user" else None))):
         st.markdown(message["content"])
 
 chat_input_box = st.chat_input("what's on your mind??")
