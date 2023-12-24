@@ -83,7 +83,7 @@ def ask_and_respond(prompt):
 
     # TrueLens logic for dev_mode
     if sudo:
-        developer = TrueLens(query_engine, prompt, response)
+        developer = TruLens(query_engine, prompt, response)
         dev_results = developer.return_rag_triad()
         with st.expander("Development Mode Evalution"):
             st.json(dev_results)
