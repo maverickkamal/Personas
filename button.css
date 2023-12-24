@@ -2,7 +2,7 @@
     width: auto; /* Adjust width as needed */
     position: fixed;
     bottom: 0.5;
-    right: 0.5;
+    right: 0;
 }
 
 [data-testid='stFileUploader'] section {
