@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 #from typing import Sequence
 from io import BytesIO
 
+gemini_pro = GeminiMultiModal(model_name="models/gemini-pro-vision")
 class ImageDocument:
     def __init__(self, image_data):
         self.image_data = image_data
