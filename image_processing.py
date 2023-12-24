@@ -19,5 +19,6 @@ def gemini(prompt, image_data):
         prompt=prompt,
         image_documents=[images_document],
     )
-    response = stream_complete_response.text
+    for r in stream_complete_response:
+        response = r.text
     return response
