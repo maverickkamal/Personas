@@ -64,7 +64,7 @@ query_engine = initialize_services()
 
 
 # Define sudo
-sudo = False # Set this to False to disable dev_mode
+sudo = True # Set this to False to disable dev_mode
 
 
 def ask_and_respond(prompt):
