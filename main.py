@@ -49,7 +49,7 @@ with st.sidebar:
         content = birth_data.calculate_birth_data()  # Call the method
         if "error" in content:
             st.write(f"Error: {content['error']}")
-         else:
+        else:
             st.write(content)
 
     st.divider()
