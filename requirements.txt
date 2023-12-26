@@ -5,3 +5,4 @@ io
 numpy
 nest_asyncio
 google-generativeai
+spacy
