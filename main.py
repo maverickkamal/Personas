@@ -80,8 +80,7 @@ def ask_and_respond(prompt):
             if image is not None:
                 bytes_data = image.getvalue()
                 response = gemini(st.session_state.messages[-1]["content"], bytes_data)
-            elif wordcheck == True:
-                
+            #elif wordcheck == True:
             else:
                 response = query_engine.query(st.session_state.messages[-1]["content"])
             #res = model.generate_content(f"{content} - {response}")
