@@ -29,7 +29,7 @@ class TruLens:
             .on_output()
             .aggregate(grounded.grounded_statements_aggregator)
         )
-        return f_groundedness(self.user_query, self.response)
+        return f_groundedness(self.user_query, str(self.response))
 
     def return_context_relevance(self):
         f_qs_relevance = (
