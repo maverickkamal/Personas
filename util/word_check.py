@@ -1,5 +1,6 @@
 import spacy
 
+spacy.cli.download("en_core_web_sm")
 class WordChecker:
     def __init__(self, word_list):
         self.nlp = spacy.load("en_core_web_sm")
