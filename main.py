@@ -5,7 +5,8 @@ from vectors import initialize_services
 import google.generativeai as genai
 from eval import TruLens
 from image_processing import gemini
-#from datetime import datetime
+from util.word_check import WordChecker
+from util.word_list import wordlist
 
 
 
@@ -45,11 +46,11 @@ with st.sidebar:
     st.write(date, time)
     if st.button('Load data'):
         load_data()
-       # content = birth_data.calculate_birth_data()  # Call the method
-        #if "error" in content:
-           # st.write(f"Error: {content['error']}")
-        #else:
-          #  st.write(content)
+        content = birth_data.calculate_birth_data()  # Call the method
+        if "error" in content:
+            st.write(f"Error: {content['error']}")
+         else:
+            st.write(content)
 
     st.divider()
     st.markdown("""<span ><font size=1>Connect With Me</font></span>""",unsafe_allow_html=True)
@@ -65,6 +66,8 @@ query_engine = initialize_services()
 
 # Define sudo
 sudo = False # Set this to False to disable dev_mode
+wordz = wordlist()
+checker = WordChecker(wordz)
 
 
 def ask_and_respond(prompt):
@@ -73,9 +76,12 @@ def ask_and_respond(prompt):
         st.markdown(prompt)
     with st.chat_message("assistant", avatar=avatar):
         with st.spinner('Generating...'):
+            wordcheck = checker.check_word_in_statement(prompt)
             if image is not None:
                 bytes_data = image.getvalue()
                 response = gemini(st.session_state.messages[-1]["content"], bytes_data)
+            elif wordcheck == True:
+                
             else:
                 response = query_engine.query(st.session_state.messages[-1]["content"])
             #res = model.generate_content(f"{content} - {response}")
