@@ -46,11 +46,11 @@ with st.sidebar:
     st.write(date, time)
     if st.button('Load data'):
         load_data()
-        content = birth_data.calculate_birth_data()  # Call the method
-        if "error" in content:
-            st.write(f"Error: {content['error']}")
-        else:
-            st.write(content)
+        #content = birth_data.calculate_birth_data()  # Call the method
+        #if "error" in content:
+           # st.write(f"Error: {content['error']}")
+        #else:
+           # st.write(content)
 
     st.divider()
     st.markdown("""<span ><font size=1>Connect With Me</font></span>""",unsafe_allow_html=True)
