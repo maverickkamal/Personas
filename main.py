@@ -72,8 +72,8 @@ checker = WordChecker(wordz)
 
 
 def ask_and_respond(prompt):
-    global content
-    content = content
+    #global content
+    content = load_data()
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user", avatar=avatar2):
         st.markdown(prompt)
