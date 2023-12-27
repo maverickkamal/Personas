@@ -57,7 +57,7 @@ with st.sidebar:
     "[Linkedin](www.linkedin.com/in/musa-kamaludeen-814009218/)"
     "[GitHub](https://github.com/maverickkamal)"
 
-
+st.write(content)
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 model = genai.GenerativeModel('gemini-pro')
     
