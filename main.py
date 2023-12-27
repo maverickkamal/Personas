@@ -57,7 +57,7 @@ with st.sidebar:
     "[Linkedin](www.linkedin.com/in/musa-kamaludeen-814009218/)"
     "[GitHub](https://github.com/maverickkamal)"
 
-st.write(content)
+#st.write(content)
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 model = genai.GenerativeModel('gemini-pro')
     
@@ -72,6 +72,7 @@ checker = WordChecker(wordz)
 
 
 def ask_and_respond(prompt):
+    global content
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user", avatar=avatar2):
         st.markdown(prompt)
