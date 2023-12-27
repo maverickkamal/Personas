@@ -26,6 +26,7 @@ with open("button.css") as css:
 
 minDate = datetime.date(1900, 1, 1)
 maxDate = datetime.date(2030, 1, 1)
+global content
 content = None  # Global variable
 
 def load_data():
@@ -33,7 +34,7 @@ def load_data():
     content = birth_data
     if "error" in content:
         st.write(f"Error: {content['error']}")
-global content
+#global content
 with st.sidebar:
     st.write("Provide your Personas")
     stdate = st.date_input("Enter date of Birth", value="today", min_value=minDate, max_value=maxDate, format="DD/MM/YYYY")
