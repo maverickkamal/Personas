@@ -7,6 +7,7 @@ from eval import TruLens
 from image_processing import gemini
 from util.word_check import WordChecker
 from util.word_list import wordlist
+from util.schema import run_conversation
 
 
 
@@ -29,9 +30,10 @@ maxDate = datetime.date(2030, 1, 1)
 
 def load_data():
     global content
-    content = birth_data.calculate_birth_data()
+    content = birth_data
     if "error" in content:
         st.write(f"Error: {content['error']}")
+global content
 with st.sidebar:
     st.write("Provide your Personas")
     stdate = st.date_input("Enter date of Birth", value="today", min_value=minDate, max_value=maxDate, format="DD/MM/YYYY")
@@ -42,10 +44,10 @@ with st.sidebar:
     date = sdate.strftime("%d/%m/%Y")
     stime = datetime.datetime.strptime(str(sttime), "%H:%M:%S")
     time = stime.strftime("%H:%M")
-    birth_data = BirthDataCalculator(date, time, longitude, latitude)
+    birth_data = (date, time, longitude, latitude)
     st.write(date, time)
     if st.button('Load data'):
-        load_data()
+        content = birth_data
         #content = birth_data.calculate_birth_data()  # Call the method
         #if "error" in content:
            # st.write(f"Error: {content['error']}")
@@ -72,19 +74,18 @@ checker = WordChecker(wordz)
 
 
 def ask_and_respond(prompt):
-    #global content
-    content = load_data()
+    global content
+    #content = load_data()
     st.write(content)
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user", avatar=avatar2):
         st.markdown(prompt)
     with st.chat_message("assistant", avatar=avatar):
         with st.spinner('Generating...'):
-            content = load_data()
+            #content = load_data()
             res = st.session_state.messages[-1]["content"]
             templ = f"Convert the provided JSON {content} into a tabular form, representing the person's personality information with relevant details excluding gate number or any numeric value. using this query: {res} as a secondary guide"
             wordcheck = checker.check_word_in_statement(res)
-            st.write(templ)
             if image is not None:
                 bytes_data = image.getvalue()
                 response = gemini(res, bytes_data)
