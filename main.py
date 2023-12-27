@@ -89,8 +89,8 @@ def ask_and_respond(prompt):
                 response = resps.text
                 
             else:
-                #response = query_engine.query(res)
-                print("Not Found")
+                response = query_engine.query(res)
+                #print("Not Found")
             #res = model.generate_content(f"{content} - {response}")
         st.markdown(response)
 
