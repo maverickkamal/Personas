@@ -26,7 +26,7 @@ with open("button.css") as css:
 
 minDate = datetime.date(1900, 1, 1)
 maxDate = datetime.date(2030, 1, 1)
-#content = None  # Global variable
+content = None  # Global variable
 
 def load_data():
     global content
