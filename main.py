@@ -78,7 +78,7 @@ def ask_and_respond(prompt):
     with st.chat_message("assistant", avatar=avatar):
         with st.spinner('Generating...'):
             res = st.session_state.messages[-1]["content"]
-            templ = f"Convert the provided JSON {content} into a tabular form, representing the person's personality information with relevant details excluding gate number or any numeric value. using this query: {res} as a secondary guide""
+            templ = f"Convert the provided JSON {content} into a tabular form, representing the person's personality information with relevant details excluding gate number or any numeric value. using this query: {res} as a secondary guide"
             wordcheck = checker.check_word_in_statement(res)
             st.write(templ)
             if image is not None:
