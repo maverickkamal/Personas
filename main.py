@@ -84,7 +84,9 @@ def ask_and_respond(prompt):
                 bytes_data = image.getvalue()
                 response = gemini(res, bytes_data)
             elif wordcheck == True:
-                response = model.generate_content(templ)
+                resps = model.generate_content(templ)
+                response = resps.text
+                
             else:
                 #response = query_engine.query(res)
                 print("Not Found")
