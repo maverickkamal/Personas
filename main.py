@@ -70,19 +70,23 @@ wordz = wordlist()
 checker = WordChecker(wordz)
 
 
+
 def ask_and_respond(prompt):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user", avatar=avatar2):
         st.markdown(prompt)
     with st.chat_message("assistant", avatar=avatar):
         with st.spinner('Generating...'):
-            wordcheck = checker.check_word_in_statement(prompt)
+            res = st.session_state.messages[-1]["content"]
+            templ = f"convert the following structured Json {content} into a tabular form as it's the person personality information with relevant information excluding gate number or any numaric value, base on this prompt {res}"
+            wordcheck = checker.check_word_in_statement(res)
             if image is not None:
                 bytes_data = image.getvalue()
-                response = gemini(st.session_state.messages[-1]["content"], bytes_data)
-            #elif wordcheck == True:
+                response = gemini(res, bytes_data)
+            elif wordcheck == True:
+                response = model.generate_content(templ)
             else:
-                response = query_engine.query(st.session_state.messages[-1]["content"])
+                response = query_engine.query(res)
             #res = model.generate_content(f"{content} - {response}")
         st.markdown(response)
 
