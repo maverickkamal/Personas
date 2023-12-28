@@ -4,7 +4,7 @@ import json
 import sys
 import os
 from dotenv import load_dotenv
-import util.gemini_functions
+import gemini_functions
 
 load_dotenv()
 api_key = st.secrets["GOOGLE_API_KEY"]
