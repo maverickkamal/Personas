@@ -82,4 +82,4 @@ def run_conversation(message, messages = []):
             "parts": [{"text": user_message}]
         }
 
-    return run_conversation(message, messages)
+    return "Hello"
