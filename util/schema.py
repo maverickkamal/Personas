@@ -48,11 +48,11 @@ def run_conversation(message, messages = []):
         sys.exit(1)
 
     response = response.json()
-
-    if "content" not in response["candidates"][0]:
-        print("ERROR: No content in response")
-        print(response)
-        sys.exit(1)
+    if "candidates" in response and response["candidates"]:
+        if "content" not in response["candidates"][0]:
+            print("ERROR: No content in response")
+            print(response)
+            sys.exit(1)
 
     message = response["candidates"][0]["content"]["parts"]
     messages.append({
