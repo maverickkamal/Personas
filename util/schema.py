@@ -27,63 +27,63 @@ def parse_function_response(message):
     return (function_name, function_response)
 
 
-def run_conversation(message, messages = []):
+def run_conversation(message, messages=[]):
     while True:
-    	messages.append(message)
+        messages.append(message)
 
-    	with open("messages.json", "w") as f:
-        	f.write(json.dumps(messages, indent=4))
+        with open("messages.json", "w") as f:
+            f.write(json.dumps(messages, indent=4))
 
-    	data = {
-        	"contents": [messages],
-        	"tools": [{
-            	"functionDeclarations": gemini_functions.definitions
-        	}]
-    	}
+        data = {
+            "contents": [messages],
+            "tools": [{
+                "functionDeclarations": gemini_functions.definitions
+            }]
+        }
 
-    	response = requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key="+api_key, json=data)
+        response = requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key="+api_key, json=data)
 
-    	if response.status_code != 200:
-        	print(response.text)
-        	print("ERROR: Unable to make request")
-        	sys.exit(1)
+        if response.status_code != 200:
+            print(response.text)
+            print("ERROR: Unable to make request")
+            sys.exit(1)
 
-    	response = response.json()
-    
-    	if "content" not in response["candidates"][0]:
-        	print("ERROR: No content in response")
-        	print(response)
-        	sys.exit(1)
+        response = response.json()
 
-    	message = response["candidates"][0]["content"]["parts"]
-    	messages.append({
-        	"role": "model",
-        	"parts": message
-    	})
+        if "content" not in response["candidates"][0]:
+            print("ERROR: No content in response")
+            print(response)
+            sys.exit(1)
 
-    	if "functionCall" in message[0]:
-        	function_name, function_response = parse_function_response(message)
+        message = response["candidates"][0]["content"]["parts"]
+        messages.append({
+            "role": "model",
+            "parts": message
+        })
 
-        	message = {
-            	"role": "function",
-            	"parts": [{
-                	"functionResponse": {
-                    	"name": function_name,
-                    	"response": {
-                        	"name": function_name,
-                        	"content": function_response
-                    	}
-                	}
-            	}]
-        	}
-    	else:
-        	user_message = message[0]["text"]
-        	message = {
-            	"role": "user",
-            	"parts": [{"text": user_message}]
-        	}
+        if "functionCall" in message[0]:
+            function_name, function_response = parse_function_response(message)
+
+            message = {
+                "role": "function",
+                "parts": [{
+                    "functionResponse": {
+                        "name": function_name,
+                        "response": {
+                            "name": function_name,
+                            "content": function_response
+                        }
+                    }
+                }]
+            }
+        else:
+            user_message = message[0]["text"]
+            message = {
+                "role": "user",
+                "parts": [{"text": user_message}]
+            }
 
         if "exit_condition" in message:  # Define an exit condition
             break
-        #run_conversation(message, messages)
+
     return messages
