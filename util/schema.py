@@ -85,5 +85,5 @@ def run_conversation(message, messages=[]):
 
         if "exit_condition" in message:  # Define an exit condition
             break
-
-    return messages
+    run_conversation(message, messages)
+    return message
