@@ -44,15 +44,15 @@ def run_conversation(message, messages=[]):
         response = requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key="+api_key, json=data)
 
         if response.status_code != 200:
-            print(response.text)
-            print("ERROR: Unable to make request")
+            st.markdown(response.text)
+            st.markdown("ERROR: Unable to make request")
             sys.exit(1)
 
         response = response.json()
 
         if "content" not in response["candidates"][0]:
-            print("ERROR: No content in response")
-            print(response)
+            st.markdown("ERROR: No content in response")
+            pst.markdown(response)
             sys.exit(1)
 
         message = response["candidates"][0]["content"]["parts"]
