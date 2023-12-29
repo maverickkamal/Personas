@@ -87,7 +87,7 @@ def ask_and_respond(prompt):
             res = st.session_state.messages[-1]["content"]
             templ = f"Convert the provided JSON {content} into a tabular form, representing the person's personality information with relevant details excluding gate number or any numeric value. using this query: {res} as a secondary guide"
             wordcheck = checker.check_word_in_statement(res)
-            messages = []
+            
             system_message = "You are an AI bot that can do everything using function calls. When you are asked to do something, use the function call you have available and then respond with a message shortly confirming what you have done. When writing Personality, Summarize the key aspects of the persons character in a table while keping it personal. When writing the Personality, Make it motivational by telling the person about their inner self."
             if image is not None:
                 bytes_data = image.getvalue()
@@ -129,6 +129,7 @@ start_message.write(
 #]
 #example_buttons = [start_message.button(example) for example in examples]
 #######################
+messages = []
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
