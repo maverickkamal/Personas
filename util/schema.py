@@ -28,7 +28,7 @@ def parse_function_response(message):
 
 
 def run_conversation(message, messages = []):
-    while true:
+    while True:
     	messages.append(message)
 
     	with open("messages.json", "w") as f:
