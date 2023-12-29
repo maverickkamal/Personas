@@ -95,7 +95,7 @@ def ask_and_respond(prompt):
             elif wordcheck == True:
                 message = {
                      "role": "user",
-                     "parts": [{"text": system_message + "\n\n" + res}]
+                     "parts": [{"text": system_message + "\n\n" + prompt}]
                 }
                 response = run_conversation(message, messages1)
                 #resps = model.generate_content(templ)
