@@ -86,4 +86,4 @@ def run_conversation(message, messages=[]):
         if "exit_condition" in message:  # Define an exit condition
             break
     run_conversation(message, messages)
-    return message
+    return response.text
