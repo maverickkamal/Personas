@@ -43,8 +43,9 @@ def run_function_call(message, messages):
     messages.append(function_message)
 
 def run_conversation(user_message, messages):
-    system_message = "You are an AI bot that can do everything using function calls. When you are asked to do something, use the function call you have available and then respond with a message shortly confirming what you have done. When writing Personality, Summarize the key aspects of the person's character in a Table or dataframe while keeping it personal. When writing the Personality, Make it motivational by telling the person about their inner self."
-
+    #system_message = "You are an AI bot that can do everything using function calls. When you are asked to do something, use the function call you have available and then respond with a message shortly confirming what you have done. When writing Personality, Summarize the key aspects of the person's character in a Table or dataframe while keeping it personal. When writing the Personality, Make it motivational by telling the person about their inner self."
+    global system_message
+    
     initial_message = {
         "role": "user",
         "parts": [{"text": system_message + "\n\n" + user_message}]
