@@ -3,7 +3,7 @@ import json
 import sys
 import os
 from dotenv import load_dotenv
-import gemini_functions
+from util import gemini_functions
 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
