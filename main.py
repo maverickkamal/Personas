@@ -98,7 +98,7 @@ def ask_and_respond(prompt):
                      "role": "user",
                      "parts": [{"text": system_message + "\n\n" + prompt}]
                 }
-                response = run_conversation(prompt, messages1)
+                response = run_conversation(message, messages1)
                 #resps = model.generate_content(templ)
                 #response = resps.text
             else:
