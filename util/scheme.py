@@ -8,6 +8,7 @@ from util import gemini_functions
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 
+system_message = "You are an AI bot that can do everything using function calls. When you are asked to do something, use the function call you have available and then respond with a message shortly confirming what you have done. When writing Personality, Summarize the key aspects of the persons character in a table while keping it personal. When writing the Personality, Make it motivational by telling the person about their inner self."
 def parse_function_response(message):
     function_call = message[0]["functionCall"]
     function_name = function_call["name"]
