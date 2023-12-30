@@ -7,7 +7,8 @@ from eval import TruLens
 from image_processing import gemini
 from util.word_check import WordChecker
 from util.word_list import wordlist
-from util.schema import run_conversation
+#from util.schema import run_conversation
+from util.scheme import run_conversation
 
 
 
@@ -88,16 +89,16 @@ def ask_and_respond(prompt):
             templ = f"Convert the provided JSON {content} into a tabular form, representing the person's personality information with relevant details excluding gate number or any numeric value. using this query: {res} as a secondary guide"
             wordcheck = checker.check_word_in_statement(res)
             
-            system_message = "You are an AI bot that can do everything using function calls. When you are asked to do something, use the function call you have available and then respond with a message shortly confirming what you have done. When writing Personality, Summarize the key aspects of the persons character in a table while keping it personal. When writing the Personality, Make it motivational by telling the person about their inner self."
+            #system_message = "You are an AI bot that can do everything using function calls. When you are asked to do something, use the function call you have available and then respond with a message shortly confirming what you have done. When writing Personality, Summarize the key aspects of the persons character in a table while keping it personal. When writing the Personality, Make it motivational by telling the person about their inner self."
             if image is not None:
                 bytes_data = image.getvalue()
                 response = gemini(res, bytes_data)
             elif wordcheck == True:
-                message = {
+               """ message = {
                      "role": "user",
                      "parts": [{"text": system_message + "\n\n" + prompt}]
-                }
-                response = run_conversation(message, messages1)
+                }"""
+                response = run_conversation(prompt, messages1)
                 #resps = model.generate_content(templ)
                 #response = resps.text
             else:
