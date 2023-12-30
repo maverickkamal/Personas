@@ -84,7 +84,8 @@ def run_conversation(user_message, messages):
         if "functionCall" in message[0]:
             run_function_call(message, messages)
         else:
-            user_response = input("Gemini: " + message[0]["text"] + "\nYou: ")
+            #user_response = input("Gemini: " + message[0]["text"] + "\nYou: ")
+            user_response = message[0]["text"]
             user_message = {
                 "role": "user",
                 "parts": [{"text": user_response}]
