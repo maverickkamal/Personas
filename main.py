@@ -94,10 +94,10 @@ def ask_and_respond(prompt):
                 bytes_data = image.getvalue()
                 response = gemini(res, bytes_data)
             elif wordcheck == True:
-               """ message = {
+                message = {
                      "role": "user",
                      "parts": [{"text": system_message + "\n\n" + prompt}]
-                }"""
+                }
                 response = run_conversation(prompt, messages1)
                 #resps = model.generate_content(templ)
                 #response = resps.text
