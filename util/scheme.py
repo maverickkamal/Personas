@@ -3,15 +3,17 @@ import json
 import sys
 import os
 from dotenv import load_dotenv
-from util import gemini_functions
+import gemini_functions
+
 
 load_dotenv()
-api_key = os.getenv("GEMINI_API_KEY")
+api_key = st.secret("GOOGLE_API_KEY")
 
-system_message = "You are an AI bot that can do everything using function calls. When you are asked to do something, use the function call you have available and then respond with a message shortly confirming what you have done. When writing Personality, Summarize the key aspects of the persons character in a table while keping it personal. When writing the Personality, Make it motivational by telling the person about their inner self."
 def parse_function_response(message):
     function_call = message[0]["functionCall"]
     function_name = function_call["name"]
+
+    #print("Gemini: Called function " + function_name )
 
     try:
         arguments = function_call["args"]
@@ -25,84 +27,61 @@ def parse_function_response(message):
 
     return (function_name, function_response)
 
-def run_function_call(message, messages):
-    function_name, function_response = parse_function_response(message)
 
-    function_message = {
-        "role": "function",
-        "parts": [{
-            "functionResponse": {
-                "name": function_name,
-                "response": {
-                    "name": function_name,
-                    "content": function_response
-                }
-            }
+def run_conversation(message, messages = []):
+    messages.append(message)
+
+    with open("messages.json", "w") as f:
+        f.write(json.dumps(messages, indent=4))
+
+    data = {
+        "contents": [messages],
+        "tools": [{
+            "functionDeclarations": gemini_functions.definitions
         }]
     }
 
-    messages.append(function_message)
+    response = requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key="+api_key, json=data)
 
-def run_conversation(user_message, messages):
-    #system_message = "You are an AI bot that can do everything using function calls. When you are asked to do something, use the function call you have available and then respond with a message shortly confirming what you have done. When writing Personality, Summarize the key aspects of the person's character in a Table or dataframe while keeping it personal. When writing the Personality, Make it motivational by telling the person about their inner self."
-    global system_message
-    
-    initial_message = {
-        "role": "user",
-        "parts": [{"text": system_message + "\n\n" + user_message}]
-    }
+    if response.status_code != 200:
+        #print(response.text)
+        #print("ERROR: Unable to make request")
+        sys.exit(1)
 
-    messages.append(initial_message)
+    response = response.json()
+    if "candidates" in response and response["candidates"]:
+       if "content" not in response["candidates"][0]:
+           print("ERROR: No content in response")
+           #print(response)
+           #sys.exit(1)
 
-    while True:
-        with open("messages.json", "w") as f:
-            f.write(json.dumps(messages, indent=4))
+    message = response["candidates"][0]["content"]["parts"]
+    messages.append({
+        "role": "model",
+        "parts": message
+    })
 
-        data = {
-            "contents": [messages],
-            "tools": [{
-                "functionDeclarations": gemini_functions.definitions
+    if "functionCall" in message[0]:
+        function_name, function_response = parse_function_response(message)
+
+        message = {
+            "role": "function",
+            "parts": [{
+                "functionResponse": {
+                    "name": function_name,
+                    "response": {
+                        "name": function_name,
+                        "content": function_response
+                    }
+                }
             }]
         }
+    else:
+        user_message = input("Gemini: " + message[0]["text"] + "\nYou: ")
+        message = {
+            "role": "user",
+            "parts": [{"text": user_message}]
+        }
 
-        response = requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key="+api_key, json=data)
-
-        if response.status_code != 200:
-            print("ERROR: Unable to make request")
-            sys.exit(1)
-
-        response = response.json()
-        if "candidates" in response and response["candidates"]:
-            if "content" not in response["candidates"][0]:
-                print("ERROR: No content in response")
-                sys.exit(1)
-
-        message = response["candidates"][0]["content"]["parts"]
-        messages.append({
-            "role": "model",
-            "parts": message
-        })
-
-        if "functionCall" in message[0]:
-            run_function_call(message, messages)
-        else:
-            #user_response = input("Gemini: " + message[0]["text"] + "\nYou: ")
-            user_response = message[0]["text"]
-            user_message = {
-                "role": "user",
-                "parts": [{"text": user_response}]
-            }
-            messages.append(user_message)
-
-        #if "functionCall" not in message[0]:
-          #  break
-
-    return response
-
-#messages = []
-
-#user_input = input("Gemini: What do you want to do?\nYou: ")
-#run_conversation(user_input, messages)
-#run_conversation(user_input, messages)
-
-#print(messages)
+    run_conversation(message, messages)
+    return response.text
