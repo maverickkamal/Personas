@@ -19,7 +19,7 @@ st.set_page_config(
 st.markdown('''# **ZENTiDE** - *Personality and Gene Keys*
 Zentide uniquely guides your path to self-growth and purpose by revealing AI-powered insights personalized to your DNA, 
 chronorhythm, and higher consciousness through an integrated framework of neural networks, ancient wisdoms and bio-algorithms.
-# **Note** 
+**Note** 
 can't perform personal chat yet unless image is uploaded
 ''')
 
