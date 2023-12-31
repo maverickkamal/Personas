@@ -125,7 +125,7 @@ start_message.write(
 start_message.write("Examples of questions I can answer:")
 examples = [
     "What is Gene Keys?",
-    "What isthe Concept personality?",
+    "What is the Concept personality?",
     "How to Leverage my Potential",
 ]
 example_buttons = [start_message.button(example) for example in examples]
