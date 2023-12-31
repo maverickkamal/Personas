@@ -1,7 +1,7 @@
 [theme]
-primaryColor="#8e44ad"   ; Wisteria Purple
-backgroundColor="#2c3e50"   ; Midnight Blue
-secondaryBackgroundColor="#1a2530"   ; Dark Background
-textColor="#ecf0f1"   ; Clouds
+primaryColor="#8e44ad"   
+backgroundColor="#2c3e50"   
+secondaryBackgroundColor="#1a2530"  
+textColor="#ecf0f1"   
 font="serif"
 
