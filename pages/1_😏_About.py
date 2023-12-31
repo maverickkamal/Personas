@@ -1,5 +1,9 @@
 import streamlit as st
 
+avatar = "https://media.roboflow.com/spaces/gemini-icon.png"
+avatar2 = "https://i.ibb.co/8BKfNPx/avatar.png"
+st.set_page_config(
+    page_title="ZENTiDE - Personality Match", page_icon=avatar)
 
 st.markdown('''# **Description**
 Zentide offers a gateway to self-actualization through harmonizing your inner consciousness with the cosmic dynamics that influence us all.
