@@ -23,7 +23,7 @@ safety_settings=[
         "threshold": "BLOCK_ONLY_HIGH",
     },
 ]
-gemini_pro = GeminiMultiModal(model_name="models/gemini-pro-vision", safety_settings=safety_settings)
+gemini_pro = GeminiMultiModal(model_name="models/gemini-pro-vision")
 class ImageDocument:
     def __init__(self, image_data):
         self.image_data = image_data
