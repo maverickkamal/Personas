@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 #from typing import Sequence
 from io import BytesIO
 
+
 safety_settings=[
     {
         "category": "HARM_CATEGORY_HARASSMENT",
@@ -16,7 +17,7 @@ safety_settings=[
     {
         "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
         "threshold": "BLOCK_ONLY_HIGH",
-    }
+    },
     {
         "category": "HARM_CATEGORY_HATE_SPEECH",
         "threshold": "BLOCK_ONLY_HIGH",
