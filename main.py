@@ -76,9 +76,9 @@ checker = WordChecker(wordz)
 
 
 def ask_and_respond(prompt):
-    global content
-    content = content
-    st.write(content)
+    #global content
+    #content = content
+    #st.write(content)
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user", avatar=avatar2):
         st.markdown(prompt)
@@ -122,13 +122,13 @@ def ask_and_respond(prompt):
 start_message = st.chat_message("assistant", avatar=avatar)
 start_message.write(
     "Hello friend, I am your Personality assisstant. how may i help you?")
-#start_message.write("Examples of questions I can answer:")
-#examples = [
-  #  "What is USCIS?",
-  #  "How do I check my case status?",
-   # "¿Puedo obtener una visa de opción STEM si voy a una universidad estadounidense?",
-#]
-#example_buttons = [start_message.button(example) for example in examples]
+start_message.write("Examples of questions I can answer:")
+examples = [
+    "What is Gene Keys?",
+    "What isthe Concept personality?",
+    "How to Leverage my Potential",
+]
+example_buttons = [start_message.button(example) for example in examples]
 #######################
 messages1 = []
 
@@ -141,9 +141,9 @@ for message in st.session_state.messages:
 
 chat_input_box = st.chat_input("what's on your mind??")
 
-#for example, example_button in zip(examples, example_buttons):
-    #if example_button:
-     #   ask_and_respond(example)
+for example, example_button in zip(examples, example_buttons):
+    if example_button:
+        ask_and_respond(example)
 
 if chat_input_box:
     ask_and_respond(chat_input_box)
