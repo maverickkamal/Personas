@@ -1,7 +1,7 @@
 [data-testid='stFileUploader'] {
     width: auto; /* Adjust width as needed */
     position: fixed;
-    bottom: 0.5;
+    bottom: 0.2;
     right: 0;
 }
 
