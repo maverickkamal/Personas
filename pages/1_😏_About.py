@@ -14,9 +14,9 @@ Zentide invites you on a beautiful journey of understanding your consciousness t
  **Note**: It's still in development as the Personality Schema is still underway 
 ''')
 
-
-st.markdown("# **Let's Connect**")
-st.link_button("Linkedin", "https://www.linkedin.com/in/musa-kamaludeen-814009218/")
-st.link_button("Twitter or X", "https://twitter.com/maverickkamal")
-st.link_button("Discord", "https://www.discordapp.com/users/1146050746131959808")
+with st.sidebar:
+    st.markdown("# **Let's Connect**")
+    st.link_button("Linkedin", "https://www.linkedin.com/in/musa-kamaludeen-814009218/")
+    st.link_button("Twitter or X", "https://twitter.com/maverickkamal")
+    st.link_button("Discord", "https://www.discordapp.com/users/1146050746131959808")
 
