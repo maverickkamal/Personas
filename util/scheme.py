@@ -8,7 +8,7 @@ from util import gemini_functions
 
 
 load_dotenv()
-api_key = st.secret("GOOGLE_API_KEY")
+api_key = st.secrets["GOOGLE_API_KEY"]
 
 def parse_function_response(message):
     function_call = message[0]["functionCall"]
