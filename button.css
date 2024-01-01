@@ -1,20 +1,21 @@
 [data-testid='stFileUploader'] {
-    width: auto; /* Adjust width as needed */
-    position: fixed;
-    bottom: 0.1;
-    right: 0;
+  width: auto; /* Adjust width as needed */
+  position: fixed;
+  bottom: 0.1;
+  right: 0;
+  display: flex; /* Added for flexbox layout */
+  align-items: center; /* Vertically align button and input */
 }
 
 [data-testid='stFileUploader'] section {
-    padding: 0;
-    float: left;
+  padding: 0;
 }
 
 [data-testid='stFileUploader'] section > input + div {
-    display: none;
+  display: none;
 }
 
 [data-testid='stFileUploader'] section + div {
-    float: right;
-    padding-top: 0;
+  padding-top: 0;
 }
+
